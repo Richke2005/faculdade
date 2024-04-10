@@ -80,8 +80,6 @@ async function sendRequest(){
 
     //Verbo http | rota | se é assincrona ou não (padrão é assíncrono)
     xmlHttp.open("POST", "http://localhost:80/server/", true);
-    //xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
     xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     const doc = coordenadas.map(function(obj){
