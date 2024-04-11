@@ -1,5 +1,5 @@
 #include <stdio.h>
-int mmcFunc(int n1n, int n2);
+int mmcFunc(int n1, int n2);
 
 int main(void){
     int n1, n2;
@@ -11,7 +11,7 @@ int main(void){
 
 int mmcFunc(int n1, int n2){
     int mmc = 1, div = 2;
-    while(n1 + n2 > 2){
+    while(n1 + n2 > (n1/n1 + n2/n2)){
         //verificar se são divisiveis igualmente
         if(n1 % div == 0 && n2 % div == 0){
             n1 = n1 / div;
