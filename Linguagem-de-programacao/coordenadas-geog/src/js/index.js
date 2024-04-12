@@ -9,6 +9,7 @@ const long4 = document.getElementById('long4');
 const lat5 = document.getElementById('lat5');
 const long5 = document.getElementById('long5');
 const ulResult = document.querySelector('ul');
+const svgCoord = document.querySelector("#svgcoord");
 
 const coordenadas = [
     {    
@@ -33,12 +34,33 @@ const coordenadas = [
     }
 ]
 
-// coordenadas.forEach(coord => coord.lat.addEventListener("change", (e)=>{ 
-//     const changedPoint = e.target
-// }),
-// coord.long.addEventListener("change", (e)=>{ 
-//     const changedPoint = e.target
-// }))
+const arrayCoord = [];
+
+coordenadas.forEach(function(e){
+    const {lat, long} = e;
+    arrayCoord.push(lat);
+    arrayCoord.push(long);
+})
+
+arrayCoord.forEach(function(ele){
+    ele.addEventListener("change", function(e){
+        svgPrint(arrayCoord);
+    })
+})
+
+function svgPrint(array){
+    let string = "";
+    for(let i = 0; i < array.length; i++){
+        if(i % 2 == 0)
+            string += " ";
+        
+        if(i % 2 !== 0)
+            string += ",";
+        
+        string += `${Number.parseInt(array[i].value) }`
+    }
+    svgCoord.setAttribute("points", string);
+}
 
 async function sendRequest(){
     //readyState: representam o estado atual da requisição 
