@@ -57,7 +57,7 @@ function svgPrint(array){
         if(i % 2 !== 0)
             string += ",";
         
-        string += `${Number.parseInt(array[i].value) }`
+        string += `${Number.parseInt(array[i].value)}`
     }
     svgCoord.setAttribute("points", string);
 }
