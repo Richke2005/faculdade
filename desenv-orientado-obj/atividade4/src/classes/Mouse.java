@@ -32,5 +32,18 @@ public class Mouse{
     public void setFabricante(String fabricante){
         this.fabricante = fabricante;
     }
-      
+
+    public String getCor(){
+        return cor;
+    }
+
+    public void setCor(String cor){
+        this.cor = cor;
+    }
+
+    public void imprimeMouse(){
+        System.out.println(numSerie);
+        System.out.println(fabricante);
+        System.out.println(cor);
+    }
 }
