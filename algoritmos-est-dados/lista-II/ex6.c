@@ -11,6 +11,10 @@ int main(void){
 
 
 int somatorio(int n){
-    int i = 1;
-    return 5 * pow(i, 2) + 2 * i + 8;
+    int i = 1, soma = 0;
+    while(i <= n){
+        soma += 5 * pow(i, 2) + 2 * i + 8;
+        i++;
+    }
+    return soma;
 }
