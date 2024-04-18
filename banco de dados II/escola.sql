@@ -186,8 +186,7 @@ DELIMITER ;
 
 SELECT calcular_idade_media();
 
--- Função que retorna a média da qtd de alunos graduados
-
+-- Função que retorna a media de alunos graduados 
 DELIMITER $$
     CREATE FUNCTION calcular_media_primeira_graduacao()
     RETURNS FLOAT
