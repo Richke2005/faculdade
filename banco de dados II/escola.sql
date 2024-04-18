@@ -173,7 +173,8 @@ CALL  listar_professores_por_disciplina(2);
 
 DELIMITER $$
 
-CREATE FUNCTION calcular_idade_media() RETURNS FLOAT
+CREATE FUNCTION calcular_idade_media() 
+RETURNS FLOAT
 BEGIN
     DECLARE idade_total FLOAT;
     DECLARE total_alunos INT;
@@ -181,10 +182,34 @@ BEGIN
     SELECT COUNT(*) INTO total_alunos FROM aluno;
     RETURN idade_total / total_alunos;
 END $$
-
 DELIMITER ;
 
 SELECT calcular_idade_media();
+
+-- Função que retorna a média da qtd de alunos graduados
+
+DELIMITER $$
+    CREATE FUNCTION calcular_media_primeira_graduacao()
+    RETURNS FLOAT
+    DETERMINISTIC 
+    BEGIN
+    DECLARE qtd_alunos INT;
+    DECLARE qtd_graduados INT;
+
+    SELECT COUNT(*) INTO qtd_alunos FROM aluno;
+    SELECT SUM(primeira_graduacao) INTO qtd_graduados
+    FROM aluno 
+    WHERE primeira_graduacao = 'S';
+
+    IF qtd_alunos = 0 THEN
+        RETURN NULL;
+    ELSE
+        RETURN CAST(qtd_graduados AS FLOAT) / qtd_alunos;
+    END IF;
+
+    END &&
+DELIMITER ;
+
 
 
 
