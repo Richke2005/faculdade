@@ -15,6 +15,7 @@ int main(void) {
   quartoTriangulo();
   return 0;
 }
+
 void primeiroTriangulo(){
   int i, j;
   for (i = SIZE; i > 0; i--) {
@@ -28,6 +29,7 @@ void primeiroTriangulo(){
     printf("\n");
   }
 }
+
 void segundoTriangulo() {
   int i, j;
   for (i = SIZE; i > 0; i--) {
@@ -37,6 +39,7 @@ void segundoTriangulo() {
     printf("\n");
   }
 }
+
 void terceiroTriangulo() {
   int i, j;
   for (i = 1; i <= SIZE; i++) {
