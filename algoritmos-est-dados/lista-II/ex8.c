@@ -18,10 +18,14 @@ int main(void) {
 void primeiroTriangulo(){
   int i, j;
   for (i = SIZE; i > 0; i--) {
-    for (j = 0; j > i; j++) {
-      printf("\n");
+    for (j = 0; j <= SIZE; j++) {
+        if(j >= i){
+            printf("*");
+        }else{
+            printf(" ");
+        }
     }
-    printf("*");
+    printf("\n");
   }
 }
 void segundoTriangulo() {
