@@ -6,7 +6,7 @@ int main(void){
     int n; 
     printf("Digite um numero inteiro para soma dos primos:\n");
     scanf("%d", &n);
-    printf("A soma dos numeros dos primeiros numero primos ate %d e:\n%d", n, somaPrimos(n));
+    printf("A soma dos numeros dos primeiros numero primos de 0 ate %d e:\n%d", n, somaPrimos(n));
     return 0;
 }
 
