@@ -90,6 +90,7 @@ INSERT INTO `escola`.`professor` (`nome`, `cpf`, `email`) VALUES ('José', '8447
 /* insert associativa dis_professores */
 INSERT INTO `escola`.`disciplina_professor` (`disciplina_key`, `professor_key`) VALUES ('1', '1');
 INSERT INTO `escola`.`disciplina_professor` (`disciplina_key`, `professor_key`) VALUES ('2', '2');
+INSERT INTO `escola`.`disciplina_professor` (`disciplina_key`, `professor_key`) VALUES ('2', '1');
 
 /* insert turma*/
 INSERT INTO `escola`.`turma` (`disciplina_key`, `professor_key`) VALUES ('1', '1');
@@ -108,11 +109,18 @@ INSERT INTO `escola`.`sexo` (`sexo`) VALUES ('Feminino');
 /* insert aluno*/
 INSERT INTO `escola`.`aluno` (`nome`, `email`, `idade`, `sexo`, `primeira_graduacao`, `est_civil`) VALUES ('richard', 'richardke18@gmail.com', '2005-06-22', 1, "S","S" );
 INSERT INTO `escola`.`aluno` (`nome`, `email`, `idade`, `sexo`, `primeira_graduacao`, `est_civil`) VALUES ('marcelinho', 'marcelo@hotmail.com', '2004-07-18', 2, "N","C");
+INSERT INTO `escola`.`aluno` (`id_aluno`, `nome`, `email`, `idade`, `sexo`, `primeira_graduacao`, `est_civil`) VALUES ('3', 'João', 'joão@hotmail.com', '2000-07-18', '1', 'S', 'S');
+INSERT INTO `escola`.`aluno` (`id_aluno`, `nome`, `email`, `idade`, `sexo`, `primeira_graduacao`, `est_civil`) VALUES ('4', 'joana', 'joana@hotmail.com', '2001-07-18', '3', 'N', 'S');
 
 /* insert aluno_turma*/
 INSERT INTO `escola`.`aluno_turma` (`aluno_key`, `turma_key`) VALUES ('1', '1');
 INSERT INTO `escola`.`aluno_turma` (`aluno_key`, `turma_key`) VALUES ('2', '1');
+INSERT INTO `escola`.`aluno_turma` (`aluno_key`, `turma_key`) VALUES ('1', '2');
+INSERT INTO `escola`.`aluno_turma` (`aluno_key`, `turma_key`) VALUES ('1', '3');
 
+-- Procedure:
+
+-- Procedure para listar alunos por turma
 DELIMITER $$
 CREATE PROCEDURE listar_alunos_por_turma(IN turma_id INT)
 	BEGIN
@@ -125,9 +133,8 @@ DELIMITER ;
 
 CALL listar_alunos_por_turma(1);
 
--- Procedure:
 
--- procedure que retorna todos os professores que lecionam determinada disciplina:
+-- Procedure que retorna todos os professores que lecionam determinada disciplina:
 
 DELIMITER $$
 	CREATE PROCEDURE listar_professores_por_disciplina(IN disciplina_id INT)
@@ -141,6 +148,7 @@ DELIMITER ;
 
 CALL  listar_professores_por_disciplina(2);
 
+-- Procedure que retorna a quantidade de alunos por sexo
 DELIMITER $$
     CREATE PROCEDURE qtd_by_sexo(IN sexo VARCHAR(10))
     BEGIN
@@ -159,7 +167,6 @@ CALL qtd_by_sexo("Masculino");
 -- Função:
 
 -- Função que retorna a media das idades dos alunos
-
 DELIMITER $$
 
 CREATE FUNCTION calcular_idade_media() 
@@ -177,34 +184,32 @@ SELECT calcular_idade_media();
 
 -- Função que retorna a media de alunos graduados 
 DELIMITER $$
-    CREATE FUNCTION calcular_media_primeira_graduacao()
-    RETURNS FLOAT
-    DETERMINISTIC 
-    BEGIN
+CREATE FUNCTION calcular_media_primeira_graduacao()
+RETURNS FLOAT
+DETERMINISTIC 
+BEGIN
     DECLARE qtd_alunos INT;
     DECLARE qtd_graduados INT;
 
     SELECT COUNT(*) INTO qtd_alunos FROM aluno;
-    SELECT SUM(primeira_graduacao) INTO qtd_graduados
+    SELECT COUNT(*) INTO qtd_graduados
     FROM aluno 
     WHERE primeira_graduacao = 'S';
 
     IF qtd_alunos = 0 THEN
         RETURN NULL;
     ELSE
-        RETURN CAST(qtd_graduados AS FLOAT) / qtd_alunos;
+        RETURN qtd_graduados / qtd_alunos;
     END IF;
-
-    END &&
+END $$
 DELIMITER ;
 
-
-
+SELECT calcular_media_primeira_graduacao();
 
 -- Inner Join
 
 -- Consulta que faz uso de uma união de tabelas para recuperar informações de aluno_turma, turma e disciplina.
-
+-- Exibe o nome do aluno id da turma e a disciplina que o aluno esta cursando
 SELECT aluno.nome AS nome_aluno, turma.id_turma, disciplina.nome AS nome_disciplina
 FROM aluno
 INNER JOIN aluno_turma ON  aluno_turma.aluno_key = aluno.id_aluno
@@ -215,8 +220,6 @@ INNER JOIN disciplina ON turma.disciplina_key = disciplina.id_disciplina;
 
 -- Trigger que registra quando um novo aluno é 
 -- inserido na tabela de alunos:
-
-
 DELIMITER $$
 
 CREATE TRIGGER log_insert_aluno
