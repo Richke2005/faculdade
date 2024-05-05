@@ -135,7 +135,6 @@ CALL listar_alunos_por_turma(1);
 
 
 -- Procedure que retorna todos os professores que lecionam determinada disciplina:
-
 DELIMITER $$
 	CREATE PROCEDURE listar_professores_por_disciplina(IN disciplina_id INT)
     BEGIN 
@@ -150,15 +149,14 @@ CALL  listar_professores_por_disciplina(2);
 
 -- Procedure que retorna a quantidade de alunos por sexo
 DELIMITER $$
-    CREATE PROCEDURE qtd_by_sexo(IN sexo VARCHAR(10))
+CREATE PROCEDURE qtd_by_sexo(IN sexo_param VARCHAR(10))
     BEGIN
         DECLARE qtd INT;
 
-        SELECT COUNT(sexo.sexo) INTO qtd FROM aluno
-        INNER JOIN sexo ON aluno.sexo = sexo.id_sexo WHERE sexo.sexo = sexo;
+        SELECT COUNT(*) INTO qtd FROM aluno
+        INNER JOIN sexo ON aluno.sexo = sexo.id_sexo WHERE sexo.sexo = sexo_param;
 
-    SELECT qts as "Quantidade de alunos";
-
+        SELECT qtd as "Quantidade de alunos por sexo";
     END $$
 DELIMITER ;
 
@@ -168,7 +166,6 @@ CALL qtd_by_sexo("Masculino");
 
 -- Função que retorna a media das idades dos alunos
 DELIMITER $$
-
 CREATE FUNCTION calcular_idade_media() 
 RETURNS FLOAT
 BEGIN
@@ -208,13 +205,13 @@ SELECT calcular_media_primeira_graduacao();
 
 -- Inner Join
 
--- Consulta que faz uso de uma união de tabelas para recuperar informações de aluno_turma, turma e disciplina.
+-- Consulta que faz uso de uma união de tabelas para recuperar informações de aluno, aluno_turma, turma e disciplina.
 -- Exibe o nome do aluno id da turma e a disciplina que o aluno esta cursando
 SELECT aluno.nome AS nome_aluno, turma.id_turma, disciplina.nome AS nome_disciplina
 FROM aluno
-INNER JOIN aluno_turma ON  aluno_turma.aluno_key = aluno.id_aluno
-INNER JOIN turma ON aluno_turma.turma_key = turma.id_turma
-INNER JOIN disciplina ON turma.disciplina_key = disciplina.id_disciplina;
+INNER JOIN aluno_turma ON  aluno.id_aluno = aluno_turma.aluno_key
+INNER JOIN turma ON turma.id_turma = aluno_turma.turma_key
+INNER JOIN disciplina ON disciplina.id_disciplina = turma.disciplina_key;
 
 -- Gatilho:
 
@@ -225,8 +222,8 @@ DELIMITER $$
 CREATE TRIGGER log_insert_aluno
 AFTER INSERT ON aluno
 FOR EACH ROW
-BEGIN
-    INSERT INTO log_alunos (acao, descricao, data) VALUES ('Inserção', CONCAT('Novo aluno inserido: ', NEW.nome), NOW());
-END $$
+    BEGIN
+        INSERT INTO log_alunos (acao, descricao, data) VALUES ('Inserção', CONCAT('Novo aluno inserido: ', NEW.nome), NOW());
+    END $$
 
 DELIMITER ;
