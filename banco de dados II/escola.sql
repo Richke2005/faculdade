@@ -62,7 +62,7 @@ FOREIGN KEY (sexo) REFERENCES sexo(id_sexo),
 PRIMARY KEY(id_aluno)
 );
 
-CREATE TABLE log_alunos (
+CREATE TABLE log_aluno (
 id_log INT AUTO_INCREMENT,
 acao VARCHAR(20),
 descricao TEXT,
@@ -223,7 +223,7 @@ CREATE TRIGGER log_insert_aluno
 AFTER INSERT ON aluno
 FOR EACH ROW
     BEGIN
-        INSERT INTO log_alunos (acao, descricao, data) VALUES ('Inserção', CONCAT('Novo aluno inserido: ', NEW.nome), NOW());
+        INSERT INTO log_aluno (acao, descricao, data) VALUES ('Inserção', CONCAT('Novo aluno inserido: ', NEW.nome), NOW());
     END $$
 
 DELIMITER ;
