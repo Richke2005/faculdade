@@ -10,6 +10,7 @@ int main(void){
     for(int i = 0; i < 8; i++){
         vetor[i] = rand() % (10 + 1);
     }
+    
     for (int i = 0; i < 8; i++){
         printf("vetor[%d] = %d\n", i, vetor[i]);
     }
