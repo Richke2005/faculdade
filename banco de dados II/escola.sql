@@ -21,8 +21,10 @@ PRIMARY KEY(id_professor)
 CREATE TABLE disciplina_professor(
 disciplina_key INT NOT NULL,
 professor_key INT NOT NULL,
-FOREIGN KEY(disciplina_key) REFERENCES disciplina(id_disciplina),
-FOREIGN KEY(professor_key) REFERENCES professor(id_professor),
+FOREIGN KEY(disciplina_key) 
+REFERENCES disciplina(id_disciplina),
+FOREIGN KEY(professor_key) 
+REFERENCES professor(id_professor),
 PRIMARY KEY(disciplina_key, professor_key)
 );
 
@@ -30,8 +32,10 @@ CREATE TABLE turma(
 id_turma INT AUTO_INCREMENT,
 disciplina_key INT NOT NULL,
 professor_key INT NOT NULL,
-FOREIGN KEY (disciplina_key) REFERENCES disciplina(id_disciplina),
-FOREIGN KEY (professor_key) REFERENCES professor(id_professor),
+FOREIGN KEY (disciplina_key) 
+REFERENCES disciplina(id_disciplina),
+FOREIGN KEY (professor_key) 
+REFERENCES professor(id_professor),
 PRIMARY KEY(id_turma)
 );
 
@@ -40,7 +44,8 @@ id_atividade INT AUTO_INCREMENT,
 titulo VARCHAR(30),
 descricao TEXT,
 turma_key INT NOT NULL,
-FOREIGN KEY(turma_key) REFERENCES turma(id_turma),
+FOREIGN KEY(turma_key) 
+REFERENCES turma(id_turma),
 PRIMARY KEY(id_atividade)
 );
 
@@ -58,7 +63,8 @@ idade DATE,
 sexo INT NOT NULL,
 primeira_graduacao CHAR(1),
 est_civil CHAR(1),
-FOREIGN KEY (sexo) REFERENCES sexo(id_sexo),
+FOREIGN KEY (sexo) 
+REFERENCES sexo(id_sexo),
 PRIMARY KEY(id_aluno)
 );
 
@@ -73,8 +79,10 @@ PRIMARY KEY (id_log)
 CREATE TABLE aluno_turma(
 aluno_key INT NOT NULL,
 turma_key INT NOT NULL,
-FOREIGN KEY (aluno_key) REFERENCES aluno(id_aluno),
-FOREIGN KEY (turma_key) REFERENCES turma(id_turma),
+FOREIGN KEY (aluno_key) 
+REFERENCES aluno(id_aluno),
+FOREIGN KEY (turma_key) 
+REFERENCES turma(id_turma),
 PRIMARY KEY(aluno_key, turma_key)
 );
 
