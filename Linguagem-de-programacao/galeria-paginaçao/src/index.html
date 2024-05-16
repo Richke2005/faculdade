@@ -7,20 +7,31 @@
     <title>Home</title>
 </head>
 <body>
-    <div class="params">
-        <label for="pagina">Prefix</label>
-            <input type="number" id="page" placeholder="Página">
-        <label for="album">Album</label>
-        <input type="number" id="album-number" min="1" max="999" value="1">
-        <input type="number" id="initial-photo" min="1" max="9999" value="1">
-        <input type="number" id="totalPages" placeholder="Total de páginas">
-    </div>
-    <section>
-        <h1>Fotos</h1>
-        <div class="galery">
-
+    <header>
+        <h1>Galeria de Fotos</h1>
+    </header>
+    <div class="content-space">
+        <div class="params">
+            <label for="prefix">Prefix</label>
+            <input type="text" id="prefix" placeholder="prefix">
+            <label for="album">Album</label>
+            <input type="number" id="album-number" min="1" max="999" value="1">
+            <label for="inital-photo">Foto inicial</label>
+            <input type="number" id="initial-photo" min="1" max="9999" value="1">
+            <label for="photos-qtd">Fotos p/ página</label>
+            <input type="number" id="photos-quantity" placeholder="Fotos por página">
         </div>
-    </section>
+        <section>
+            <h1>Fotos</h1>
+            <div class="gallery">
+                <img src="../public/images/a001_0.jpg" style="width: 20vw; padding: 5px" alt="">
+                <img src="../public/images/a001_1.jpg" style="width: 20vw; padding: 5px" alt="">
+                <img src="../public/images/a001_2.jpg" style="width: 20vw; padding: 5px" alt="">
+            </div>
+            <button class="pass-pages" class="next"><</button>
+            <button class="pass-pages" class="before">></button>
+        </section>
+    </div>
     <script src="./js/index.js"></script>
 </body>
 </html>

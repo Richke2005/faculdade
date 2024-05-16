@@ -1,0 +1,50 @@
+*{
+    scroll-behavior: smooth;
+ }
+
+ body {
+   margin: 0;
+   font-family: 'Segoe UI', 'Roboto', 'Oxygen',
+     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+     sans-serif;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+ }
+
+ header {
+    width: 100vw;
+    height: 12vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: white;
+    border-bottom: solid 1px black;
+    position: fixed;
+    top: 0;
+ }
+
+ .content-space {
+    margin-top: 12vh;
+    width: 100vw;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+ }
+
+ .params {
+    width: 20%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+ }
+
+ .gallery {
+    margin-top: 5px;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+ }
