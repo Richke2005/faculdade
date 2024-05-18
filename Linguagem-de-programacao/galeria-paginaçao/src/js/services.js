@@ -18,7 +18,22 @@ function getImagesByPage({page = 1, limit = 12, skip = 1}){
     return images;
 }
 
+function getImagesFromTo(initial, perPage){
+    const images = [];
 
-export {
-    getImagesByPage
+    while(initial < perPage){
+        images.push({
+            id: i,
+            title: `Imagem ${initial}`,
+            url: `../public/images/a001_${initial}.jpg`
+        })
+        initial++;
+    }
+
+    return images;
+}
+
+module.exports = {
+    getImagesByPage, 
+    getImagesFromTo
 }

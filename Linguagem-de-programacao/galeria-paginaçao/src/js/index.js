@@ -1,4 +1,9 @@
-import { getImagesByPage } from "./services";
+const { getImagesFromTo  } = require("./services");
+
+
+
+const prefix = document.getElementById("prefix");
+
 function renderImages(father){
     const images = getImagesByPage({page: 1, limit: 12});
     
@@ -11,3 +16,4 @@ function renderImages(father){
     });
 }
 
+console.log(getImagesFromTo(3, 12));
