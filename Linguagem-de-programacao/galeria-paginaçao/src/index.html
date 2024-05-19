@@ -14,24 +14,24 @@
         <div class="params">
             <label for="prefix">Prefix</label>
             <input type="text" id="prefix" placeholder="prefix">
-            <label for="album">Album</label>
+            <label for="album-number">Album</label>
             <input type="number" id="album-number" min="1" max="999" value="1">
-            <label for="inital-photo">Foto inicial</label>
+            <label for="initial-photo">Foto inicial</label>
             <input type="number" id="initial-photo" min="1" max="9999" value="1">
-            <label for="photos-qtd">Fotos p/ página</label>
+            <label for="photos-quantity">Fotos p/ página</label>
             <input type="number" id="photos-quantity" placeholder="Fotos por página">
+            <button class="play" id="play-button">play</button>
         </div>
+
         <section>
             <h1>Fotos</h1>
             <div class="gallery">
-                <img src="../public/images/a001_0.jpg" style="width: 32vw; padding: 5px" alt="">
-                <img src="../public/images/a001_1.jpg" style="width: 32vw; padding: 5px" alt="">
-                <img src="../public/images/a001_2.jpg" style="width: 32vw; padding: 5px" alt="">
+               
             </div>
-            <button onclick="()=> console.log(getImagesFroTo(3, 12));" class="pass-pages before"><</button>
-            <button class="pass-pages next">></button>
+            <button onclick="()=> console.log(getImagesFromTo({album: '001', initial: 2, perPage: 12}))" class="pass-pages before" id="before-button">Before</button>
+            <button class="pass-pages next" id="next-button">Next</button>
         </section>
     </div>
-    <script src="./js/index.js"></script>
+    <script src="../dist/bundle.js"></script>
 </body>
 </html>
