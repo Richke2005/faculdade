@@ -8,7 +8,9 @@
 </head>
 <body>
     <header>
-        <h1>Galeria de Fotos</h1>
+        <h1 style="color: seagreen;">Canvas </h1>
+        <h2><p>Photos's gallery</p></h2>
+        <h3>by rick</h3>
     </header>
     <div class="content-space">
         <div class="params">
@@ -20,16 +22,15 @@
             <input type="number" id="initial-photo" min="1" max="9999" value="1">
             <label for="photos-quantity">Fotos p/ página</label>
             <input type="number" id="photos-quantity" placeholder="Fotos por página">
-            <button class="play" id="play-button">play</button>
+            <button class="button" id="play-button">Play</button>
         </div>
 
         <section>
-            <h1>Fotos</h1>
             <div class="gallery">
                
             </div>
-            <button onclick="()=> console.log(getImagesFromTo({album: '001', initial: 2, perPage: 12}))" class="pass-pages before" id="before-button">Before</button>
-            <button class="pass-pages next" id="next-button">Next</button>
+            <button class="button before" id="before-button">Before</button>
+            <button class="button next" id="next-button">Next</button>
         </section>
     </div>
     <script src="../dist/bundle.js"></script>

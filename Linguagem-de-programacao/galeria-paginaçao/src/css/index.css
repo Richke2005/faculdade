@@ -39,6 +39,14 @@
     flex-direction: column;
  }
 
+ input {
+    width: 90%;
+    padding: 10px;
+    border: none;
+    border-bottom: solid 1px black;
+    margin-bottom: 20px;
+ }
+
  .gallery {
     width: 85%;
     display: flex;
@@ -47,10 +55,7 @@
     justify-content: space-between;
  }
 
- .pass-pages {
-   position: fixed;
-   bottom: 10px;
-   padding: 20px;
+ .button {
    background-color: transparent;
    border: 3px solid black;
    border-radius: 40px;
@@ -59,16 +64,22 @@
    transition: 0.5s;
  }
 
- .pass-pages:hover {
+ .button:hover {
    color: white;
    background-color: black;
    transition: .5s;
 }
 
- .pass-pages.next { 
+ .button.next { 
+   position: fixed;
+   bottom: 10px;
+   padding: 20px;
    right: 20px;
  }
 
- .pass-pages.before {
+ .button.before {
+   position: fixed;
+   bottom: 10px;
+   padding: 20px;
    left: 20px;
  }

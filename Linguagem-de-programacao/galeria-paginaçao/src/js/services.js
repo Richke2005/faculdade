@@ -34,8 +34,26 @@ function getImagesFromTo({album = "001", initial = 0, to = 12}){
     return images;
 }
 
+function renderImages(father, images, size = "32vw"){
+    const currentPage = sessionStorage.getItem("page");
+    father.innerHTML = "";
+    images.forEach(image => {
+        const imgTag = document.createElement('img');
+        imgTag.setAttribute("alt", image.title);
+        imgTag.setAttribute("src", image.url);
+        imgTag.style.width = size;
+        imgTag.style.padding = "5px";
+        imgTag.style.borderRadius = "10px"
+        father.appendChild(imgTag);
+      
+    });
+  
+}
+
+
 module.exports = {
     getImagesByPage, 
-    getImagesFromTo
+    getImagesFromTo,
+    renderImages
 }
   
