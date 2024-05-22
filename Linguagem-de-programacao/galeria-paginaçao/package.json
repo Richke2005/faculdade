@@ -4,7 +4,8 @@
   "description": "galeria de fotos com paginação",
   "main": "./src/js/index.js",
   "scripts": {
-    "test": "node ./src/js/index.js"
+    "bundle": "browserify ./src/js/ > ./dist/bundle.js",
+    "testScript": "node ./src/js/index.js"
   },
   "repository": {
     "type": "git",
