@@ -5,7 +5,7 @@
 
 int main(void){
     char matriz[3][3];
-    int counter, nPlayers, playerTime = 0;
+    int counter, nPlayers, timeFromP = 0;
     
 
     fillMatriz(matriz);
@@ -23,11 +23,12 @@ int main(void){
 
     do{
         int l, j;
-        printf("%d\n", playerTime);
+        //printf("%d\n", timeFromP);
         showGame(matriz);
-        printf("Digite a linha e coluna que deseja preencher:\n");
+        printf("%s Digite um numero de 1 a 3 referente a linha e coluna que deseja preencher:\n", 
+        players[timeFromP].name);
         scanf("%d %d", &l, &j);
-        play(l, j, matriz, playerTime);
+        play(l, j, matriz, &timeFromP);
     }while(1);
 
     

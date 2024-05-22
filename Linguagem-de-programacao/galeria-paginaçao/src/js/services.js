@@ -3,34 +3,34 @@
 //page - pagina escolhida, se assemelha a um album escolar
 //limit - limites de foto por pagina
 //skip - quantas fotos serão puladas a partir do contador -> skip 2 = 0, 2, 4, 6, ...
-function getImagesByPage(album = "001", {page = 1, limit = 12, skip = 1}){
+function getImagesByPage(album = 1, {page = 1, limit = 12, skip = 1}){
     const images = [];
-
+    const stringAlbum = album.toString();
     let i = (page * limit) - limit;
     while(i < (page * limit)){
+        const stringNumber = i.toString();
         images.push({
             id: i,
             title: `Imagem ${i}`,
-            url: `../public/images/a${album}_${i}.jpg`
-        })
+            url: `../public/images/a${stringAlbum.padStart(3, '0')}_${stringNumber.padStart(5, '0')}.jpg`
+        });
         i += skip;
     }
-
     return images;
 }
 
-function getImagesFromTo({album = "001", initial = 0, to = 12}){
+function getImagesFromTo({album = 1, initial = 0, to = 12}){
     const images = [];
-
+    const stringAlbum = album.toString();
     while(initial < to){
+        const stringNumber = initial.toString();
         images.push({
             id: initial,
             title: `Imagem ${initial}`,
-            url: `../public/images/a${album}_${initial}.jpg`
+            url: `../public/images/a${stringAlbum.padStart(3, '0')}_${stringNumber.padStart(5, '0')}.jpg`
         })
         initial++;
     }
-
     return images;
 }
 

@@ -4,34 +4,34 @@
 //page - pagina escolhida, se assemelha a um album escolar
 //limit - limites de foto por pagina
 //skip - quantas fotos serão puladas a partir do contador -> skip 2 = 0, 2, 4, 6, ...
-function getImagesByPage(album = "001", {page = 1, limit = 12, skip = 1}){
+function getImagesByPage(album = 1, {page = 1, limit = 12, skip = 1}){
     const images = [];
-
+    const stringAlbum = album.toString();
     let i = (page * limit) - limit;
     while(i < (page * limit)){
+        const stringNumber = i.toString();
         images.push({
             id: i,
             title: `Imagem ${i}`,
-            url: `../public/images/a${album}_${i}.jpg`
+            url: `../public/images/a${stringAlbum.padStart(3, '0')}_${stringNumber.padStart(5, '0')}.jpg`
         })
         i += skip;
     }
-
     return images;
 }
 
-function getImagesFromTo({album = "001", initial = 0, to = 12}){
+function getImagesFromTo({album = 1, initial = 0, to = 12}){
     const images = [];
-
+    const stringAlbum = album.toString();
     while(initial < to){
+        const stringNumber = initial.toString();
         images.push({
             id: initial,
             title: `Imagem ${initial}`,
-            url: `../public/images/a${album}_${initial}.jpg`
+            url: `../public/images/a${stringAlbum.padStart(3, '0')}_${stringNumber.padStart(5, '0')}.jpg`
         })
         initial++;
     }
-
     return images;
 }
 
@@ -77,11 +77,11 @@ window.addEventListener("load", function(){
     if(!sessionStorage.getItem("splash")){
  
         // Splash has not been displayed, so show it:
-        renderImages(gallery, getImagesByPage("001",{page: 1, limit: 12}));
+        renderImages(gallery, getImagesByPage(1 ,{page: 1, limit: 12}));
         // Store a value in localStorage to denote that the splash screen
         // has now been displayed
         sessionStorage.setItem("splash", "true");
-        sessionStorage.setItem("album", "001")
+        sessionStorage.setItem("album", 1)
         sessionStorage.setItem("page", 1)
         sessionStorage.setItem("limit", 12) 
         }else{
@@ -96,10 +96,10 @@ window.addEventListener("load", function(){
 
 
 playButton.addEventListener("click", (e) => {
-    const albumValue = album.value
+    const albumValue = Number.parseInt(album.value);
     const initialValue = Number.parseInt(initialPhoto.value) - 1;
     const qtdValue = Number.parseInt(qtdPhotos.value);
-
+    //render the images in the screen and up the info to storage
     renderImages(gallery, getImagesFromTo({album: albumValue, initial: initialValue, to: qtdValue}))
 
     sessionStorage.setItem("album", albumValue)
@@ -112,7 +112,7 @@ next.addEventListener("click", (e) => {
     const currentPage = sessionStorage.getItem("page");
     const currentAlbum = sessionStorage.getItem("album");
     const currentLimit = sessionStorage.getItem("limit");
-
+    //pass the current page to sessionStorage and render the image
     sessionStorage.setItem("page", Number(currentPage) + 1);
     renderImages(gallery, getImagesByPage(currentAlbum, {page: Number(currentPage) + 1, limit: Number(currentLimit)}));
 
