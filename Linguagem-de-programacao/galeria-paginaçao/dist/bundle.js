@@ -7,7 +7,7 @@ module.exports = function renderImages(father, images, size = "32vw"){
         imgTag.setAttribute("src", image.url);
         imgTag.style.width = size;
         imgTag.style.padding = "5px";
-        imgTag.style.borderRadius = "10px"
+        imgTag.style.borderRadius = "10px";
         father.appendChild(imgTag);
     });
 }
@@ -19,7 +19,7 @@ module.exports = function renderImages(father, images, size = "32vw"){
 //page - pagina escolhida, se assemelha a um album escolar
 //limit - limites de foto por pagina
 //skip - quantas fotos serão puladas a partir do contador -> skip 2 = 0, 2, 4, 6, ...
-function getImages(album = 1, type = ".jpg",  {page, initial, limit = 12, skip = 1}){
+function getImages(prefix = "a", album = 1, type = ".jpg",  {page, initial, limit = 12, skip = 1}){
     const images = [];
     const stringAlbum = album.toString();
     page = (page && !initial) ? page : definePageByInitial(initial, limit);
@@ -32,24 +32,9 @@ function getImages(album = 1, type = ".jpg",  {page, initial, limit = 12, skip =
         images.push({
             id: i,
             title: `Imagem ${i}`,
-            url: `../public/images/a${stringAlbum.padStart(3, '0')}_${stringNumber.padStart(5, '0')}${type}`
+            url: `../public/images/${prefix}${stringAlbum.padStart(3, '0')}_${stringNumber.padStart(5, '0')}${type}`
         });
         i += skip;
-    }
-    return images;
-}
-
-function getImagesFromTo({album = 1, initial = 0, to = 12}){
-    const images = [];
-    const stringAlbum = album.toString();
-    while(initial < to){
-        const stringNumber = initial.toString();
-        images.push({
-            id: initial,
-            title: `Imagem ${initial}`,
-            url: `../public/images/a${stringAlbum.padStart(3, '0')}_${stringNumber.padStart(5, '0')}.jpg`
-        })
-        initial++;
     }
     return images;
 }
@@ -65,8 +50,8 @@ function definePageByInitial(initial, limit){
 
 
 module.exports = {
-    getImages, 
-    getImagesFromTo,
+    getImages,
+    defineIByPage, 
     definePageByInitial
 }
   
@@ -85,18 +70,18 @@ const playButton = document.getElementById("play-button");
 const before = document.getElementById("before-button");
 const next = document.getElementById("next-button");
 
-
 window.addEventListener("load", function(){
     // Check localStorage to see if the splash screen 
     // has NOT already been displayed
     if(!sessionStorage.getItem("splash")){
  
         // Splash has not been displayed, so show it:
-        renderImages(gallery, getImages(1 , ".jpg", {page: 1, limit: 12}));
+        renderImages(gallery, getImages("a", 1, ".jpg", {page: 1, limit: 12}));
         // Store a value in localStorage to denote that the splash screen
         // has now been displayed
         
         sessionStorage.setItem("splash", "true");
+        sessionStorage.setItem("prefix", "a")
         sessionStorage.setItem("album", 1);
         sessionStorage.setItem("type", ".jpg")
         sessionStorage.setItem("page", 1);
@@ -104,6 +89,7 @@ window.addEventListener("load", function(){
         }else{
             renderImages(gallery, 
                 getImages(
+                this.sessionStorage.getItem("prefix"),    
                 this.sessionStorage.getItem("album"), 
                 this.sessionStorage.getItem("type"),
                 {
@@ -115,8 +101,8 @@ window.addEventListener("load", function(){
         }
     });
 
-
 playButton.addEventListener("click", (e) => {
+    const prefixValue = prefix.value;
     const albumValue = Number.parseInt(album.value);
     const sizeValue = size.value;
     const typeValue = type.value;
@@ -124,32 +110,38 @@ playButton.addEventListener("click", (e) => {
     const limit = Number.parseInt(photosLimit.value);
     const page = definePageByInitial(initialValue, limit);
     //render the images in the screen and up the info to storage
-    renderImages(gallery, getImages(albumValue,
+    renderImages(gallery, getImages(
+        prefixValue,
+        albumValue,
         typeValue,
         {
             initial: initialValue,
             limit: limit
         }), sizeValue);
-    
-    sessionStorage.setItem("size", sizeValue);
-    sessionStorage.setItem("type", typeValue);
+
+    sessionStorage.setItem("prefix", prefixValue);
     sessionStorage.setItem("album", albumValue);
+    sessionStorage.setItem("type", typeValue);
     sessionStorage.setItem("page", page);
     sessionStorage.setItem("initial-photo", initialValue);
     sessionStorage.setItem("limit", limit);
+    sessionStorage.setItem("size", sizeValue);
 });
 
 //next page functions
 next.addEventListener("click", (e) => {
-    const currentPage = sessionStorage.getItem("page");
-    const currentType = sessionStorage.getItem("type");
-    const currentSize = sessionStorage.getItem("size");
+    const currentPrefix = sessionStorage.getItem("prefix");
     const currentAlbum = sessionStorage.getItem("album");
+    const currentType = sessionStorage.getItem("type");
+    const currentPage = sessionStorage.getItem("page");
     const currentLimit = sessionStorage.getItem("limit");
+    const currentSize = sessionStorage.getItem("size");
+    
     //pass the current page to sessionStorage and render the image
     sessionStorage.setItem("page", Number(currentPage) + 1);
     renderImages(gallery, 
         getImages(
+        currentPrefix,
         currentAlbum,
         currentType,
             {
@@ -163,15 +155,17 @@ next.addEventListener("click", (e) => {
 });
 
 before.addEventListener("click", (e) => {
-    const currentPage = sessionStorage.getItem("page");
-    const currentType = sessionStorage.getItem("type");
-    const currentSize = sessionStorage.getItem("size");
+    const currentPrefix = sessionStorage.getItem("prefix");
     const currentAlbum = sessionStorage.getItem("album");
+    const currentType = sessionStorage.getItem("type");
+    const currentPage = sessionStorage.getItem("page");
     const currentLimit = sessionStorage.getItem("limit");
+    const currentSize = sessionStorage.getItem("size");
 
     sessionStorage.setItem("page", Number(currentPage) - 1);
     renderImages(gallery, 
         getImages(
+        currentPrefix,
         currentAlbum,
         currentType,
             {

@@ -6,7 +6,7 @@ module.exports = function renderImages(father, images, size = "32vw"){
         imgTag.setAttribute("src", image.url);
         imgTag.style.width = size;
         imgTag.style.padding = "5px";
-        imgTag.style.borderRadius = "10px"
+        imgTag.style.borderRadius = "10px";
         father.appendChild(imgTag);
     });
 }
