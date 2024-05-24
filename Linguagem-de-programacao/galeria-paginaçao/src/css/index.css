@@ -47,6 +47,14 @@
     margin-bottom: 20px;
  }
 
+.selects {
+    width: 90%;
+    padding: 10px;
+    background: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
  .gallery {
     width: 85%;
     display: flex;
