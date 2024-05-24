@@ -29,13 +29,16 @@ window.addEventListener("load", function(){
         sessionStorage.setItem("page", 1);
         sessionStorage.setItem("limit", 12); 
         }else{
-            renderImages(gallery, getImages(
+            renderImages(gallery, 
+                getImages(
                 this.sessionStorage.getItem("album"), 
                 this.sessionStorage.getItem("type"),
-            {
-                page: Number(this.sessionStorage.getItem("page")),
-                limit: Number(this.sessionStorage.getItem("limit"))
-            }));
+                {
+                    page: Number(this.sessionStorage.getItem("page")),
+                    limit: Number(this.sessionStorage.getItem("limit"))
+                }), 
+            this.sessionStorage.getItem("size")
+            );
         }
     });
 

@@ -18,7 +18,6 @@ function getImages(album = 1, type = ".jpg",  {page, initial, limit = 12, skip =
             title: `Imagem ${i}`,
             url: `../public/images/a${stringAlbum.padStart(3, '0')}_${stringNumber.padStart(5, '0')}${type}`
         });
-        console.log(i);
         i += skip;
     }
     return images;

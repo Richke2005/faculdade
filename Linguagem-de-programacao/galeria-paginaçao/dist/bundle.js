@@ -1,6 +1,6 @@
 (function(){function p(o,i,f){var a="function"==typeof require&&require;function c(n,r){if(!i[n]){if(!o[n]){var e="function"==typeof require&&require;if(!r&&e)return e(n,!0);if(a)return a(n,!0);var r=new Error("Cannot find module '"+n+"'");throw r.code="MODULE_NOT_FOUND",r}var e=i[n]={exports:{}};o[n][0].call(e.exports,function(r){var e;return c(o[n][1][r]||r)},e,e.exports,p,o,i,f)}return i[n].exports}for(var r=0;r<f.length;r++)c(f[r]);return c}return p})()({1:[function(require,module,exports){
 module.exports = function renderImages(father, images, size = "32vw"){
-    father.innerHTML = " p";
+    father.innerHTML = "";
     images.forEach(image => {
         const imgTag = document.createElement('img');
         imgTag.setAttribute("alt", image.title);
@@ -34,7 +34,6 @@ function getImages(album = 1, type = ".jpg",  {page, initial, limit = 12, skip =
             title: `Imagem ${i}`,
             url: `../public/images/a${stringAlbum.padStart(3, '0')}_${stringNumber.padStart(5, '0')}${type}`
         });
-        console.log(i);
         i += skip;
     }
     return images;
@@ -103,13 +102,16 @@ window.addEventListener("load", function(){
         sessionStorage.setItem("page", 1);
         sessionStorage.setItem("limit", 12); 
         }else{
-            renderImages(gallery, getImages(
+            renderImages(gallery, 
+                getImages(
                 this.sessionStorage.getItem("album"), 
                 this.sessionStorage.getItem("type"),
-            {
-                page: Number(this.sessionStorage.getItem("page")),
-                limit: Number(this.sessionStorage.getItem("limit"))
-            }));
+                {
+                    page: Number(this.sessionStorage.getItem("page")),
+                    limit: Number(this.sessionStorage.getItem("limit"))
+                }), 
+            this.sessionStorage.getItem("size")
+            );
         }
     });
 

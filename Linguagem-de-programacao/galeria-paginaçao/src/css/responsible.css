@@ -1,0 +1,28 @@
+@media only screen and (max-width: 600px) {
+    .content-space {
+        display: flex;
+        flex-direction: column;
+     }
+
+    .params {
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+     }
+
+     .gallery {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+     }
+
+     .button.before {
+        position: fixed;
+        padding: 20px;
+        bottom: 10px;
+        right: auto;
+        left: 10px;
+      }
+}
+

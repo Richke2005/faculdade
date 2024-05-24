@@ -1,5 +1,5 @@
 module.exports = function renderImages(father, images, size = "32vw"){
-    father.innerHTML = " p";
+    father.innerHTML = "";
     images.forEach(image => {
         const imgTag = document.createElement('img');
         imgTag.setAttribute("alt", image.title);
