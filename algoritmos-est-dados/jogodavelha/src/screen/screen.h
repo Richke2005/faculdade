@@ -1,16 +1,18 @@
 #include <stdio.h>
-#include "../models/user.h"
 
-struct user* initPlayers(){
-    int nPlayers;
-    printf(" Quantos jogadores irão participar:\n 1 or 2 ?\n");
-    scanf("%d", &nPlayers);
-    struct user players[nPlayers];
-
-    for(int i = 0; i < nPlayers; i++){
-        printf("Digite o nome do jogador %d:\n", i+1);
-        scanf("%s", players[i].name);
+//função que exibe o jogo de forma legível ao usuário
+void showGame(char matriz[3][3]){
+    int i,j;
+    for(i=0; i<3; i++){
+        for(j=0; j<3; j++){
+            if(j == 1)
+                 printf("| %c |",matriz[i][j]);
+            else
+            printf(" %c ",matriz[i][j]);
+        }
+        printf("\n");
+        if (i == 2)
+            break;
+        printf("---|---|---\n");
     }
-
-    return players;
 }

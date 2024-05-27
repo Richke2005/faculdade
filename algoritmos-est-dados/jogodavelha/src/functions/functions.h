@@ -1,20 +1,6 @@
 #include <stdio.h>
-void showGame(char matriz[3][3]){
-    int i,j;
-    for(i=0; i<3; i++){
-        for(j=0; j<3; j++){
-            if(j == 1)
-                 printf("| %c |",matriz[i][j]);
-            else
-            printf(" %c ",matriz[i][j]);
-        }
-        printf("\n");
-        if (i == 2)
-            break;
-        printf("---|---|---\n");
-    }
-}
 
+//função para preenchimento da matriz e inicialização
 void fillMatriz(char matriz[3][3]){
     int i,j;
     for(i=0; i<3; i++){
@@ -24,46 +10,67 @@ void fillMatriz(char matriz[3][3]){
     }
 }
 
-int gameOver(char matriz[3][3]){
+//função que verifica se a matriz ja esta preenchida por algum jogador
+int verifyIsFilled(int l, int j, char matriz[3][3]){
+    if(matriz[l - 1][j - 1] == 'X' || matriz[l - 1][j - 1] == 'O'){
+        return 1;
+    }
     return 0;
 }
 
-int end(char word){
-    return 0;
-}
-
-void play(int l, int j, char matriz[3][3], int *player){
-    if(*player == 0){
-        *player = 1;
+//função para realizar a jogada dos jogadores
+void play(int l, int j, char matriz[3][3], int player){
+    if(player == 0){
         matriz[l - 1][j - 1] = 'X';
-    }else if(*player == 1){
-        *player = 0;
+    }else if(player == 1){
         matriz[l - 1][j - 1] = 'O';
     }
 }
 
-void fillWithX(int l, int j, char matriz[3][3]){
-    matriz[l - 1][j - 1] = 'X';
+//função que troca o jogador
+void changePlayer(int *player){
+    switch (*player){
+    case 0:
+        *player = 1;
+        break;
+    case 1:
+        *player = 0;
+    default:
+        break;
+    }
 }
 
-void fillWithO(int l, int j, char matriz[3][3]){
-    matriz[l - 1][j - 1] = 'O';
-}
-
-void verifyWinner(char matriz[3][3]){
-    //verificar transversais
-    //verifica verticais
+//função que verifica se a um ganhador
+int verifyWinner(char matriz[3][3]){
+    for (int i = 0; i < 3; i++) {
+    // Verifica a linha i
+        if (matriz[i][0] == matriz[i][1] && matriz[i][1] == matriz[i][2] && matriz[i][0] != '?') {
+            printf("Vencedor na linha %d: %c\n", i, matriz[i][0]);
+            return 1;
+        }
+    
+    //verificar colunas
+        if (matriz[0][i] == matriz[1][i] && matriz[1][i] == matriz[2][i] && matriz[0][i] != '?') {
+            printf("Vencedor na coluna %d: %c\n", i, matriz[0][i]);
+            return 1;
+        }
+    
     //verificar diagonais
-}
+        if (matriz[0][0] == matriz[1][1] && matriz[1][1] == matriz[2][2] && matriz[0][0] != '?') {
+            printf("Vencedor na diagonal principal: %c\n", matriz[0][0]);
+            return 1;
+        }
 
-int diagons(char matriz[3][3]){
-    int i,j;
-    for(i=0; i<3; i++){
-        for(j=0; j<3; j++){
-            if(matriz[i][j] == matriz[i+1][j+1] && matriz[i+1][j+1] == matriz[i+2][j+2] && matriz[i][j]!= '?'){
-                return 1;
-            }
+        if (matriz[0][2] == matriz[1][1] && matriz[1][1] == matriz[2][0] && matriz[0][2] != '?') {
+            printf("Vencedor na diagonal secundária: %c\n", matriz[0][2]);
+            return 1;
         }
     }
     return 0;
+}
+
+//função que reseta a matriz quando necessário
+void reset(char matriz[3][3], int *counter){
+    fillMatriz(matriz);
+    *counter = 0;
 }

@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "functions.h": "c",
+        "screen.h": "c",
+        "user.h": "c"
+    }
+}
