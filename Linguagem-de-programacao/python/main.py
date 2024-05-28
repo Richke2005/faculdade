@@ -1,10 +1,7 @@
+from matplotlib import pyplot as plt 
+
+years = [1950, 1970, 1980]
+
+gpd = [300.2, 543.3, 1075.9]
 
 
-def main():
-    print("------------- Welcome to the program {} ------------")
-    numero = int(input("- Digite um numero: "))
-    numero2 = int(input("- Digite outro numero: "))
-    print(numero + numero2)
-
-
-main()
