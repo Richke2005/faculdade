@@ -13,7 +13,7 @@ git clone https://github.com/Richke2005/faculdade.git
 2. Navegue até o diretório do projeto:
 
 ```bash
-cd faculdade
+cd faculdade/Linguagem-de-programacao/galeria-paginacao
 ```
 
 3. Instale as dependências:
