@@ -17,8 +17,9 @@ int main(void){
     scanf("%d", &n2);
 
     if(n1 != n2){
-        temp = n1;
+        
         printf("Valores antes da troca %d e %d\n", n1, n2);
+        temp = n1;
         n1 = n2;
         n2 = temp;
         printf("Os valores trocados sao %d e %d\n", n1, n2);
